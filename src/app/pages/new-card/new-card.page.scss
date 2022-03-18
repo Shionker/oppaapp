@@ -1,0 +1,95 @@
+.paymentCard {
+  height: 280px;
+  background: linear-gradient(135deg, #434343, #000, #434343);
+  border-radius: 25px;
+
+  ion-text{
+    background: linear-gradient(90deg, rgba(123,123,126,1) 0%, rgba(255,255,255,1) 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  ion-text.title {
+    font-size: 2.5em;
+  }
+
+  ion-icon.master-card {
+    position: absolute;
+    top: 195px;
+    right: 30px;
+    font-size: 82px;
+    filter: invert(0) sepia(1) saturate(0) hue-rotate(215deg);
+  }
+
+  ion-icon.visa {
+    position: absolute;
+    top: 205px;
+    right: 30px;
+    font-size: 82px;
+    filter: saturate(0) hue-rotate(215deg);
+  }
+
+  ion-icon.debit {
+    position: absolute;
+    top: 205px;
+    right: 30px;
+    font-size: 82px;
+  }
+
+  ion-img {
+    position: absolute;
+    width: 50px;
+    height: auto;
+    top: 90px;
+    left: 30px;
+  }
+
+  .card-number {
+    position: absolute;
+    top: 130px;
+    font-size: 2.1em;
+    left: 70px;
+  }
+
+  .card-date-title {
+    position: absolute;
+    top: 170px;
+    left: 180px;
+  }
+
+  .card-date {
+    position: absolute;
+    top: 160px;
+    left: 230px;
+    font-size: 1em;
+  }
+
+  .card-owner {
+    position: absolute;
+    top: 230px;
+    left: 30px;
+    font-size: 1.8em;
+  }
+
+}
+
+ion-button {
+  bottom: 0;
+  position: absolute;
+  width: 99%;
+}
+
+ion-item-header {
+  ion-title {
+    padding-left: 15px;
+  }
+}
+
+ion-grid {
+  height: calc(100vh - 56px);
+}
+
+ion-footer {
+  position: absolute;
+  bottom: 5px;
+}

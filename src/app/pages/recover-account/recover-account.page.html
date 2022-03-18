@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>¿Olvidaste tu contraseña?</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid *ngIf="step === 1">
+    <ion-img src="../../../assets/images/password-img.svg"></ion-img>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="recoverAccountForm" (ngSubmit)="getCode()" ngNativeValidate>
+          <h4>Ingresa tu rut y recibirás un código en tu email (o el de tu padrino) para recuperar tu cuenta:</h4>
+          <ion-list>
+            <ion-item>
+              <ion-icon slot="start" src="../../../assets/icons/id-card-outline.svg"></ion-icon>
+              <ion-label position="floating">Rut</ion-label>
+              <ion-input formControlName="rut" maxlength="12" [value]="recoverAccountForm.get('rut').value | rutParse" type="text" required></ion-input>
+            </ion-item>
+          </ion-list>
+          <ion-button fill="outline" class="bottom-btn-2" expand="block" color="secondary" (click)="step = 2">Ya tengo un código</ion-button>
+          <ion-button type="submit" class="bottom-btn" expand="block" color="primary">Enviar</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="step === 2">
+    <ion-img src="../../../assets/images/write.svg"></ion-img>
+    <ion-row>
+      <ion-col>
+        <form [formGroup]="changePassForm" (ngSubmit)="sendNewPass()" ngNativeValidate>
+          <h4>Ingresa el código recibido y tu nueva contraseña:</h4>
+          <ion-list>
+            <ion-item>
+              <ion-icon slot="start" name="document-lock-outline"></ion-icon>
+              <ion-label position="floating">Código</ion-label>
+              <ion-input formControlName="code" type="text" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon slot="start" name="lock-open-outline"></ion-icon>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input formControlName="password" type="password" required (keyup)="onPasswordChange()"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon slot="start" name="lock-open-outline"></ion-icon>
+              <ion-label position="floating">Verifique Contraseña</ion-label>
+              <ion-input formControlName="checkPassword" type="password" required (keyup)="onPasswordChange()" [ngClass]="{ invalid: passConfirmationWrong, valid: !passConfirmationWrong }"></ion-input>
+            </ion-item>
+            <span *ngIf="confirm_password.hasError('mismatch')" class="pass-not-match red-text"><strong>Las contraseñas deben coincidir.</strong></span>
+          </ion-list>
+          <ion-button type="submit" class="bottom-btn" expand="block" color="primary">Cambiar Contraseña</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

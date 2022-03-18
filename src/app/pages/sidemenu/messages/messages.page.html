@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mensajes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="$messages | loading | async as messages">
+    <ion-list>
+
+      <!-- skeleton list loading -->
+      <ng-template [ngIf]="messages.loading">
+        <ion-item *ngFor="let i of [1,2,3,4,5,6,7,8,9]">
+          <ion-avatar size="large" slot="start">
+            <ion-skeleton-text animated></ion-skeleton-text>
+          </ion-avatar>
+          <ion-label>
+            <ion-skeleton-text animated style="width: 40%; height: 3vh;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 20%;" class="timeago"></ion-skeleton-text>
+          </ion-label>
+        </ion-item>
+      </ng-template>
+      
+      <!-- list of messages -->
+      <ng-template [ngIf]="messages.value">
+        <ion-item button (click)="openModal(chat)" *ngFor="let chat of messages.value.chats">
+          <ion-avatar size="large" slot="start">
+            <ion-img *ngIf="chat.provider_img_url" [src]="apiUrl + chat.provider_img_url"></ion-img>
+            <ion-img *ngIf="!chat.provider_img_url" src="../../../../assets/images/default_avatar.png"></ion-img>
+          </ion-avatar>
+          <ion-label>
+            <h2 slot="start">{{ chat.title }}</h2>
+            <p slot="end">{{ chat.provider_name }}</p>
+            <p>{{ chat.last_msg?.text }}</p>
+            <p class="timeago">{{ chat.last_msg?.created_at | date: 'dd/MM/yyyy' }}</p>
+  
+            <!-- aquí hacer algo para mostrar solo la hora (o un hace xx tiempo) en caso de q el último mensaje sea durante el día -->
+            <!-- <p class="timeago">{{ chat.created_at | date: 'dd/mm/yyyy' }}</p> -->
+          </ion-label>
+        </ion-item>
+      </ng-template>
+      
+    </ion-list>
+    
+    <!-- no messages -->
+    <ng-template [ngIf]="!messages.value?.chats.length">
+      <ion-col size="12">
+        <ion-img class="not-messages" src="../../../../../assets/images/not_messages.svg"></ion-img>
+        <h1 class="ion-text-center">Aquí verás los mensajes <br>de tus proveedores</h1>
+      </ion-col>
+    </ng-template>
+  </div>
+</ion-content>

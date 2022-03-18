@@ -1,0 +1,8 @@
+.active-item {
+  // border-left: 8px solid var(--ion-color-primary);
+  --ion-item-background: var(--ion-color-primary);
+}
+
+.active-item ion-icon {
+  --ion-icon-stroke-width: 40px;
+}

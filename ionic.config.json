@@ -1,0 +1,7 @@
+{
+  "name": "oppa-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,44 @@
+ion-content.bicolor {
+  ion-toolbar:nth-child(2) {
+    height: 30vh;
+  }
+
+  ion-title {
+    font-size: 2.2em;
+
+  }
+
+}
+
+ion-content form:nth-child(3) ion-card {
+  margin-top: -8vh;
+  z-index: 99;
+}
+
+ion-content form:nth-child(4) ion-card {
+  z-index: 99;
+}
+
+ion-toolbar ion-icon {
+  font-size: 30px;
+}
+
+ion-toolbar ion-avatar {
+  height: 140px;
+  width: 140px;
+  margin-top: -1.2vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ion-item ion-avatar {
+  height: 50px;
+  width: 50px;
+}
+
+ion-fab-button {
+  margin-top: 80px;
+  height: 50px;
+  margin-left: 20px;
+  width: 50px;
+}

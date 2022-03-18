@@ -1,0 +1,45 @@
+ion-card-header ion-grid ion-row ion-col ion-label {
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  padding-bottom: 10px;
+}
+
+.elder-data {
+  margin-top: -205px;
+}
+
+.elder-data ion-avatar {
+  margin: auto;
+  height: 150px;
+  width: 150px;
+}
+
+.elder-data ion-text {
+  color: white;
+  font-size: large;
+}
+
+ion-title>ion-label {
+  color: white;
+}
+
+.not-services {
+  width: 70%;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 180px;
+}
+
+ion-header {
+
+  ion-button {
+
+    ion-icon {
+      position: relative;
+      right: -70px;
+    }
+
+  }
+
+}

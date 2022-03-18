@@ -1,0 +1,64 @@
+<form [formGroup]="newRecordForm" (ngSubmit)="saveRecord()" ngNativeValidate>
+  <ion-content class="bicolor">
+    <ion-button class="close-btn" (click)="closeModal()">
+      <ion-icon size="large" slot="icon-only" name="close"></ion-icon>
+    </ion-button>
+    <ion-img class="header-img" src="../../../../../assets/images/pexels-pixabay-40568.jpg"></ion-img>
+    <ion-card class="ion-margin-horizontal ion-padding-horizontal">
+      <ion-list lines="none">
+        <ion-list-header class="ion-no-padding">
+          <ion-grid class="ion-no-padding">
+            <ion-row class="ion-no-padding">
+              <ion-col class="ion-text-center ion-no-padding" size="12">
+                <h1 class="ion-no-margin ion-margin-top">
+                  <ion-label color="primary"><strong>Nuevo Registro</strong></ion-label>
+                </h1>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-list-header>
+        <ion-item>
+          <ion-label position="fixed">Título</ion-label>
+          <ion-input required formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="fixed">Descripción</ion-label>
+          <ion-textarea required formControlName="description"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-radio-group formControlName="icon">
+            <ion-label>Tipo</ion-label>
+
+            <ion-item class="ion-no-padding">
+              <ion-label>Diagnóstico de enfermedad</ion-label>
+              <ion-radio slot="start" value="medic"></ion-radio>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label>Colocación de inyección</ion-label>
+              <ion-radio slot="start" value="syringe"></ion-radio>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label>Receta de medicamento</ion-label>
+              <ion-radio slot="start" value="pills"></ion-radio>
+            </ion-item>
+
+            <ion-item class="ion-no-padding">
+              <ion-label>Otro</ion-label>
+              <ion-radio slot="start" value="document-text-outline"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-item>
+      </ion-list>
+    </ion-card>
+  </ion-content>
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-button type="submit" class="ion-margin-horizontal" expand="block" color="primary">
+        <ion-text color="dark">Crear Registro</ion-text>
+      </ion-button>
+    </ion-toolbar>
+  </ion-footer>
+</form>

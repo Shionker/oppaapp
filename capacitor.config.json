@@ -1,0 +1,13 @@
+{
+  "appId": "oppa.app",
+  "appName": "oppa-app",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000
+    }
+  },
+  "cordova": {}
+}

@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Servicios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid class="ion-no-padding" *ngIf="$superCategoriesServices | loading | async as superCategoriesServices">
+    
+    <!-- skeleton card for loading -->
+    <ng-template [ngIf]="superCategoriesServices.loading" *ngFor="let i of [1,2,3]">
+      <ion-row>
+        <ion-col size="12">
+          <ion-skeleton-text class="ion-margin-start ion-margin-top" animated style="width: 40%; height: 2vh; margin-left: 16px;"></ion-skeleton-text>
+        </ion-col>
+        <ion-slides [options]="slideOpts">
+          <ion-slide *ngFor="let i of [1,2]">
+            <ion-card>
+              <ion-skeleton-text animated class="ion-no-margin" style="width: 400px; height: 20vh;"></ion-skeleton-text>
+              <ion-card-header>
+                <ion-skeleton-text animated style="width: 25%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 55%"></ion-skeleton-text>
+                <ion-skeleton-text class="ion-margin-top" animated style="width: 100%; height: 5vh;"></ion-skeleton-text>
+              </ion-card-header>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-row>
+    </ng-template>
+
+    <!-- services on lists of cards -->
+    <ng-template [ngIf]="superCategoriesServices.value">
+      <ion-row *ngFor="let superCategory of superCategoriesServices.value.superCategories">
+        <ng-template [ngIf]="superCategory.services.length > 0">
+          <ion-col size="9">
+            <ion-text>
+              <h4 class="ion-no-margin ion-margin-start ion-margin-top"><strong>{{ superCategory.title }}</strong></h4>
+            </ion-text>
+          </ion-col>
+          <ion-col>
+            <ion-chip class="ion-no-margin ion-float-right" [routerLink]="superCategory.title">
+              <ion-label color="primary">Ver todos</ion-label>
+            </ion-chip>
+          </ion-col>
+          <ion-slides [options]="slideOpts">
+            <ion-slide *ngFor="let service of superCategory.services">
+              <ion-card>
+                <ion-img [src]="apiUrl + service.img_url"></ion-img>
+                <ion-card-header>
+                  <ion-grid class="ion-no-padding">
+                    <ion-row class="ion-no-padding">
+                      <ion-col size="12" class="ion-text-left">
+                        <ion-text color="dark">
+                          <p class="ion-no-margin"><strong>{{ service.title | titlecase }}</strong></p>
+                        </ion-text>
+                        <p class="ion-no-margin">Costo: ${{ service.price | number }}</p>
+                      </ion-col>
+                      <ion-col size="12">
+                        <ion-button expand="block" color="primary" class="ion-no-margin ion-margin-top"
+                          (click)="openModal(service)">solicitar</ion-button>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-header>
+              </ion-card>
+            </ion-slide>
+          </ion-slides>
+        </ng-template>
+      </ion-row>
+    </ng-template>
+
+    <!-- no services -->
+    <ng-template [ngIf]="superCategoriesServices.value?.length === 0">
+      <ion-grid>
+        <ion-col size="12">
+          <ion-img class="not-services" src="../../../../../assets/images/clear_history.svg"></ion-img>
+          <h1 class="ion-text-center">Aún no hay servicios</h1>
+        </ion-col>
+      </ion-grid>
+    </ng-template>
+
+    <!-- error on get services -->
+    <ng-template [ngIf]="superCategoriesServices.error">
+      <app-error></app-error>
+    </ng-template>
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Saldo:</ion-title>
+    <ion-title slot="end" class="ion-padding-horizontal"> ${{ (user.credit | number) || 0 }}</ion-title>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Tarjeta de Crédito/Débito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card class="paymentCard">
+          <ion-card-content>
+            <ion-text color="dark" class="ion-float-right title"><strong>Banco</strong></ion-text>
+            <ion-img src="../../../assets/images/credit-card-chip.png"></ion-img>
+            <ion-text class="card-number"><strong>XXXX XXXX XXXX XXXX</strong></ion-text>
+            <ion-text *ngIf="cardDataForm.value.type === 'credit'" class="card-date-title">Válido<br>hasta</ion-text>
+            <br>
+            <ion-text *ngIf="cardDataForm.value.type === 'credit'" class="card-date"><strong><pre>-- / --</pre></strong></ion-text>
+            <ion-icon *ngIf="cardDataForm.value.type === 'credit' && cardDataForm.value.cardNumber.toString().slice(0,1)[0] === '5'" src="../../../assets/icons/master-card.svg" class="master-card"></ion-icon>
+            <ion-icon *ngIf="cardDataForm.value.type === 'credit' && cardDataForm.value.cardNumber.toString().slice(0,1)[0] === '4'" src="../../../assets/icons/visa.svg" class="visa"></ion-icon>
+            <ion-icon *ngIf="cardDataForm.value.type === 'debit'" class="debit" src="../../../assets/icons/redcompra.svg"></ion-icon>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <form [formGroup]="cardDataForm" (ngSubmit)="pay()" ngNativeValidate>
+      <ion-row>
+        <ion-col>
+          <ion-list lines="none">
+            <ion-list-header>
+              <ion-title class="ion-no-padding"><strong>Datos de la tarjeta</strong></ion-title>
+            </ion-list-header>
+            <ion-item>
+              <ion-label>Tipo de tarjeta</ion-label>
+              <ion-select formControlName="type" placeholder="Seleccionar">
+                <ion-select-option value="credit">Crédito</ion-select-option>
+                <ion-select-option value="debit">Débito</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Número de tarjeta</ion-label>
+              <ion-input type="number" formControlName="cardNumber"></ion-input>
+            </ion-item>
+            <ion-item *ngIf="cardDataForm.value.type === 'credit'">
+              <ion-label>CVV</ion-label>
+              <ion-input inputmode="numeric" pattern="[0-9]{3,4}" type="text" minlength="3" maxlength="4" formControlName="cvv"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Mes de expiración</ion-label>
+              <ion-input inputmode="numeric" pattern="[0-9]{2}" type="text" minlength="2" maxlength="2" min="1" max="12" formControlName="month"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>Año de expiración</ion-label>
+              <ion-input inputmode="numeric" pattern="[0-9]{2}" type="text" minlength="2" maxlength="2" min="1" max="99" formControlName="year"></ion-input>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-footer>
+        <ion-toolbar>
+          <ion-button type="submit" class="ion-padding-horizontal" expand="block" color="primary">Pagar</ion-button>
+        </ion-toolbar>
+      </ion-footer>
+    </form>
+  </ion-grid>
+</ion-content>

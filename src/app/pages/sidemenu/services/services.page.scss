@@ -1,0 +1,17 @@
+ion-slide img {
+  min-width: max-content;
+}
+
+ion-chip {
+  margin-top: 10px;
+}
+
+ion-card>ion-img {
+  height: 25vh;
+  width: 300px;
+  object-fit: cover;
+}
+
+ion-card {
+  width: 300px;
+}

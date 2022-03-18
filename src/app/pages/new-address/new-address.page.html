@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Nueva Dirección</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="none">
+    <form [formGroup]="newAddressForm" ngNativeValidate>
+      <ion-item class="ion-margin-vertical">
+        <ion-label class="ion-text-wrap" position="fixed">Calle</ion-label>
+        <ion-input class="ion-text-wrap" placeholder="Ej: Av. Providencia" formControlName="street" type="text" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-vertical">
+        <ion-label class="ion-text-wrap" position="fixed">Número</ion-label>
+        <ion-input class="ion-text-wrap" placeholder="Ej: 286" formControlName="number" type="text" inputmode="numeric" required></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-vertical">
+        <ion-label class="ion-text-wrap" position="fixed">Dpto, villa, pasaje, etc. (opcional)</ion-label>
+        <ion-input class="ion-text-wrap" placeholder="Ej: Dpto. A605" formControlName="other" type="text"></ion-input>
+      </ion-item>
+      <ion-item class="ion-margin-vertical">
+        <ion-label>Región</ion-label>
+        <ion-select formControlName="region" placeholder="Seleccionar" class="ion-no-padding" cancelText="cancelar" okText="aceptar" (ionChange)="getDistrictsByRegion()">
+          <ion-select-option *ngFor="let region of regions">{{ region.nombre }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item class="ion-margin-vertical">
+        <ion-label>Comuna</ion-label>
+        <ion-select formControlName="district" placeholder="Seleccionar" class="ion-no-padding" cancelText="cancelar" okText="aceptar">
+          <ion-select-option *ngFor="let district of districts">{{ district.nombre }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <ion-button expand="block" color="light" (click)="closeModal(true)">Cancelar</ion-button>
+            <ion-button expand="block" color="primary" (click)="saveAddress()">Guardar</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ion-list>
+</ion-content>

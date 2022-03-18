@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>Abonar Saldo</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal(false)"><ion-icon name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-margin-top">
+      <ion-col size="10" offset="1">
+        <ion-img src="../../../../../assets/images/wallet.svg"></ion-img>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <!-- <pre>optSelected: {{ optSelected | json}}</pre>
+        <pre>amount: {{ addCreditsForm.controls['amount'].value | json}}</pre> -->
+        <ion-title>Seleccione el monto</ion-title>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card button [ngClass]="{'card-selected': optSelected === 1}" (click)="optSelected = 1; addCreditsForm.controls['amount'].setValue('5000')">
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="cash-outline" size="large"></ion-icon>
+            <ion-title color="dark"><strong>${{ '5000' | number }}</strong></ion-title>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card button [ngClass]="{'card-selected': optSelected === 2}" (click)="optSelected = 2; addCreditsForm.controls['amount'].setValue('10000')">
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="cash-outline" size="large"></ion-icon>
+            <ion-title color="dark"><strong>${{ '10000' | number }}</strong></ion-title>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card button [ngClass]="{'card-selected': optSelected === 3}" (click)="optSelected = 3; addCreditsForm.controls['amount'].setValue('20000')">
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="cash-outline" size="large"></ion-icon>
+            <ion-title color="dark"><strong>${{ '20000' | number }}</strong></ion-title>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card button [ngClass]="{'card-selected': optSelected === 4}" (click)="optSelected = 4; addCreditsForm.controls['amount'].setValue('')">
+          <ion-card-content class="ion-text-center">
+            <ion-icon name="cash-outline" size="large"></ion-icon>
+            <ion-title color="dark"><strong>Otro</strong></ion-title>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col class="ion-padding-horizontal" size="12" *ngIf="optSelected === 4">
+        <form [formGroup]="addCreditsForm" (ngSubmit)="addCredits()">
+          <ion-list lines="none">
+            <ion-item>
+              <ion-label>Ingrese monto</ion-label>
+              <ion-input formControlName="amount" inputmode="numeric" type="text" placeholder="${{ '25000' | number }}" (ionChange)="formatNumber()"></ion-input>
+            </ion-item>
+          </ion-list>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="addCredits()" class="ion-padding-horizontal" expand="block" color="primary">Continuar</ion-button>
+  </ion-toolbar>
+</ion-footer>

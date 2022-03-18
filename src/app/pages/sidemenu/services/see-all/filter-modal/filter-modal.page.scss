@@ -1,0 +1,27 @@
+ion-icon[name="checkmark-outline"] {
+  --ionicon-stroke-width: 100px;
+}
+
+ion-range {
+
+  ion-icon:nth-child(2), ion-icon:nth-child(3), ion-icon:nth-child(4) {
+    margin: -5px;
+  }
+
+  ion-icon:nth-child(2){
+    padding-left: 15px;
+  }
+
+  ion-icon:nth-child(3){
+    padding-bottom: 5px;
+  }
+
+  ion-icon {
+    color: rgba(var(--ion-text-color-rgb, 0, 0, 0), 0.54);
+  }
+
+}
+
+ion-content {
+  background-color: #383a3e;
+}

@@ -1,0 +1,44 @@
+<ion-content class="bicolor">
+  <ion-button class="close-btn" (click)="closeModal()">
+    <ion-icon size="large" slot="icon-only" name="close"></ion-icon>
+  </ion-button>
+  <ion-img class="header-img" [src]="service.img"></ion-img>
+  <ion-card class="ion-margin-horizontal ion-padding-horizontal">
+    <form [formGroup]="updateServiceForm" (ngSubmit)="updateService()" ngNativeValidate>
+      <ion-list lines="none">
+        <ion-list-header class="ion-no-padding">
+          <ion-grid class="ion-no-padding">
+            <ion-row class="ion-no-padding">
+              <ion-col class="ion-text-center ion-no-padding" size="12">
+                <h1 class="ion-no-margin ion-margin-top"><ion-label color="secondary"><strong>{{ service.name | titlecase }}</strong></ion-label></h1>
+              </ion-col>
+              <ion-col class="ion-text-center ion-no-padding" size="12">
+                <h3 class="ion-no-margin"><ion-text>${{ service.price | number }}</ion-text></h3>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-list-header>
+        <ion-item class="ion-margin-vertical">
+          <ion-label position="fixed">Nombre Proveedor</ion-label>
+          <ion-input readonly formControlName="providerName" type="text"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-vertical">
+          <ion-label position="fixed">Tipo</ion-label>
+          <ion-input readonly formControlName="type" type="text"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-vertical">
+          <ion-label position="fixed">Fecha</ion-label>
+          <ion-input readonly formControlName="date" type="text"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-vertical">
+          <ion-label position="fixed">Estado</ion-label>
+          <ion-input readonly formControlName="state" type="text"></ion-input>
+        </ion-item>
+        <ion-item class="ion-margin-vertical">
+          <ion-label position="fixed">Description</ion-label>
+          <ion-textarea wrap="soft" autoGrow readonly formControlName="description"></ion-textarea>
+        </ion-item>
+      </ion-list>
+    </form>
+  </ion-card>
+</ion-content>

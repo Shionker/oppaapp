@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-menu-button slot="start"></ion-menu-button>
+    <ion-button class="ion-margin-end" expand="block" (click)="changeUserSelected()" color="light">
+      <ion-text color="dark">
+        {{ userSelected.firstname + ' ' + userSelected.lastname }}
+      </ion-text>
+      <ion-icon name="chevron-down-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bicolor">
+  <ion-toolbar color="secondary">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-avatar>
+            <ion-img *ngIf="userSelected.img_url" [src]="apiUrl + userSelected.img_url"></ion-img>
+            <ion-img *ngIf="!userSelected.img_url" src="../../../../assets/images/default_avatar.png"></ion-img>
+          </ion-avatar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+  <ion-card class="ion-margin-horizontal ion-padding-horizontal" *ngIf="$userRecords | loading | async as userRecords">
+    <ion-list lines="none">
+      <ion-list-header class="ion-text-center ion-no-padding ion-margin-bottom">
+        <ion-title color="primary">Ficha Clínica</ion-title>
+      </ion-list-header>
+
+      <!-- skeleton loading -->
+      <ng-template [ngIf]="userRecords.loading">
+        <ion-list *ngFor="let i of [1,2,3,4]">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="2.5">
+                <ion-skeleton-text animated style="width: 70%; height: 40px;"></ion-skeleton-text>
+              </ion-col>
+              <ion-col>
+                <ion-skeleton-text animated style="width: 70%;"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 100%;"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 60%;"></ion-skeleton-text>
+              </ion-col>
+              <ion-col size="2.5">
+                <ion-skeleton-text animated style="width: 70%; height: 40px;" class="ion-float-end"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 70%;" class="ion-float-end"></ion-skeleton-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-list>
+      </ng-template>
+
+      <!-- userRecords list -->
+      <ng-template [ngIf]="userRecords.value">
+        <ion-item *ngFor="let record of userRecords.value.records">
+          <ion-icon *ngIf="record.icon_type === 'ion-icon'" slot="start" size="large" [name]="record.icon"></ion-icon>
+          <ion-icon *ngIf="record.icon_type === 'custom-icon'" slot="start" size="large" src="../../../../assets/icons/{{record.icon}}.svg"></ion-icon>
+          <ion-label>
+            <h2>{{ record.title }}</h2>
+            <p class="ion-text-wrap">{{ record.description }}</p>
+          </ion-label>
+          <ion-icon class="ion-padding-bottom" slot="end" size="large" name="calendar-outline"></ion-icon>
+          <time slot="end">{{ record.created_at | date:'shortDate'}}</time>
+        </ion-item>
+      </ng-template>
+
+      <!-- no userRecords -->
+      <ng-template [ngIf]="userRecords.value?.records?.length === 0">
+        <ion-grid>
+          <ion-col size="12">
+            <ion-img class="not-services" src="../../../../../assets/images/clear_history.svg"></ion-img>
+            <h1 class="ion-text-center">Aún no has hecho registros</h1>
+          </ion-col>
+        </ion-grid>
+      </ng-template>
+
+    </ion-list>
+
+    <!-- error on get userRecords -->
+    <ng-template [ngIf]="userRecords.error">
+      <app-error></app-error>
+    </ng-template>
+
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="openModal()" class="ion-margin-horizontal" expand="block" color="primary">
+      <ion-text color="dark">Nuevo registro</ion-text>
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

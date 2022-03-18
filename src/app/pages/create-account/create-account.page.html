@@ -1,0 +1,96 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Crea una nueva cuenta
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding-bottom ion-padding-horizontal" color="light">
+  <ion-grid style="height: 100%;">
+    <form [formGroup]="createAccountForm" (ngSubmit)="createAccount()" ngNativeValidate>
+      <ion-row>
+        <ion-col>
+          <ion-item class="ion-margin-bottom">
+            <ion-grid class="ion-margin">
+              <ion-row>
+                <ion-col class="ion-text-center">
+                  <ion-avatar>
+                    <ion-img *ngIf="!user_img" src="../../../assets/images/default_avatar.png"></ion-img>
+                    <ion-img *ngIf="user_img" [src]="'data:image/jpeg;base64,' + user_img"></ion-img>
+                  </ion-avatar>
+                  <ion-fab-button>
+                    <ion-fab (click)="selectImage()">
+                      <ion-icon name="camera-outline"></ion-icon>
+                    </ion-fab>
+                  </ion-fab-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <ion-item class="ion-margin-bottom">
+            <ion-icon slot="start" name="person-outline"></ion-icon>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="firstname" type="text" required></ion-input>
+          </ion-item>
+          <ion-item class="ion-margin-bottom">
+            <ion-icon slot="start" name="person-outline"></ion-icon>
+            <ion-label position="floating">Apellido</ion-label>
+            <ion-input formControlName="lastname" type="text" required></ion-input>
+          </ion-item>
+          <ion-item class="ion-margin-vertical">
+            <ion-icon slot="start" src="../../../assets/icons/birthdate-outline.svg"></ion-icon>
+            <ion-label position="floating">Fecha de Nacimiento</ion-label>
+            <ion-datetime cancelText="cancelar"
+                          doneText="aceptar"
+                          formControlName="birthdate"
+                          monthShortNames="ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic"
+                          required></ion-datetime>
+          </ion-item>
+          <ion-item class="ion-margin-vertical">
+            <ion-icon slot="start" name="call-outline"></ion-icon>
+            <ion-label position="floating">Teléfono</ion-label>
+            <ion-input formControlName="phone" type="tel" placeholder="+56 9 xxxx xxxx" required></ion-input>
+          </ion-item>
+          <ion-item class="ion-margin-vertical">
+            <ion-icon slot="start" name="male-female-outline"></ion-icon>
+            <ion-label>Género</ion-label>
+            <ion-select formControlName="gender" placeholder="Seleccionar" class="ion-no-padding" cancelText="cancelar" okText="aceptar">
+              <ion-select-option value="mujer">Mujer</ion-select-option>
+              <ion-select-option value="hombre">Hombre</ion-select-option>
+              <ion-select-option value="otro">Otro</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="ion-margin-bottom">
+            <ion-icon slot="start" src="../../../assets/icons/id-card-outline.svg"></ion-icon>
+            <ion-label position="floating">Rut</ion-label>
+            <ion-input formControlName="rut" maxlength="12" [value]="createAccountForm.get('rut').value | rutParse" type="text" required></ion-input>
+          </ion-item>
+          <ion-item class="ion-margin-bottom">
+            <ion-icon slot="start" name="mail-outline"></ion-icon>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email" type="email" required></ion-input>
+          </ion-item>
+          <ion-item class="ion-margin-vertical">
+            <ion-icon slot="start" name="lock-open-outline"></ion-icon>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input formControlName="password" type="password" required (keyup)="onPasswordChange()"></ion-input>
+          </ion-item>
+          <ion-item class="ion-margin-vertical">
+            <ion-icon slot="start" name="lock-open-outline"></ion-icon>
+            <ion-label position="floating">Verifique Contraseña</ion-label>
+            <ion-input formControlName="checkPassword" type="password" required (keyup)="onPasswordChange()" [ngClass]="{ invalid: confirm_password.hasError('mismatch'), valid: confirm_password.hasError('mismatch') }"></ion-input>
+          </ion-item>
+          <span *ngIf="confirm_password.hasError('mismatch')" class="pass-not-match red-text"><strong>Las contraseñas deben coincidir.</strong></span>
+          <ion-item class="ion-margin-vertical">
+            <ion-label class="ion-text-wrap">Al crear una cuenta estás aceptando los <a><strong>Términos del servicio</strong></a> y <a><strong>Política de privacidad</strong></a></ion-label>
+          </ion-item>
+          <ion-button type="submit" class="ion-margin-vertical" expand="block">Crear Cuenta</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-grid>
+</ion-content>

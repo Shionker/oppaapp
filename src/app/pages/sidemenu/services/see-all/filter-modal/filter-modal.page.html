@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="mode == 'all'">Todos los filtros</ion-title>
+    <ion-title *ngIf="mode == 'orderBy'">Ordenar por</ion-title>
+    <ion-title *ngIf="mode == 'priceRange'">Rango de precios</ion-title>
+    <ion-icon class="ion-padding-end" slot="end" size="large" name="close-outline" (click)="closeModal()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="mode == 'all' || mode == 'orderBy'">
+    <ion-title class="ion-padding-top ion-padding-bottom" *ngIf="mode == 'all'">Ordenar por</ion-title>
+    <ion-list lines="none">
+      <!-- <ion-item button (click)="selectOrderBy('recommended')">
+        <ion-icon slot="start" name="ribbon-outline"></ion-icon>
+        Recomendado para ti (predeterminado)
+        <ion-icon *ngIf="orderBy == 'recommended'" color="success" slot="end" name="checkmark-outline"></ion-icon>
+      </ion-item> -->
+      <ion-item button (click)="selectOrderBy('alphaAsc')">
+        <ion-icon slot="start" name="arrow-up-outline"></ion-icon>
+        Alfabeto (ascendente)
+        <ion-icon *ngIf="orderBy == 'alphaAsc'" color="success" slot="end" name="checkmark-outline"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="selectOrderBy('alphaDesc')">
+        <ion-icon slot="start" name="arrow-down-outline"></ion-icon>
+        Alfabeto (descendente)
+        <ion-icon *ngIf="orderBy == 'alphaDesc'" color="success" slot="end" name="checkmark-outline"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="selectOrderBy('priceAsc')">
+        <ion-icon slot="start" name="arrow-up-outline"></ion-icon>
+        Precio (ascendente)
+        <ion-icon *ngIf="orderBy == 'priceAsc'" color="success" slot="end" name="checkmark-outline"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="selectOrderBy('priceDesc')">
+        <ion-icon slot="start" name="arrow-down-outline"></ion-icon>
+        Precio (descendente)
+        <ion-icon *ngIf="orderBy == 'priceDesc'" color="success" slot="end" name="checkmark-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="mode == 'all' || mode == 'priceRange'">
+    <ion-title class="ion-padding-top ion-padding-bottom" *ngIf="mode == 'all'">Rango de precios</ion-title>
+    <ion-list lines="none" [ngClass]="{'ion-margin-top': mode == 'priceRange'}">
+      <ion-item>
+        <ion-range class="ion-no-padding" min="1" max="4" snaps="true">
+          <ion-icon slot="start" src="../../../../../../assets/icons/dollar-solid.svg" size="small"></ion-icon>
+          <ion-icon slot="end" src="../../../../../../assets/icons/dollar-solid.svg"></ion-icon>
+          <ion-icon slot="end" src="../../../../../../assets/icons/dollar-solid.svg"></ion-icon>
+          <ion-icon slot="end" src="../../../../../../assets/icons/dollar-solid.svg"></ion-icon>
+        </ion-range>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button class="ion-padding-horizontal" expand="block" color="primary" (click)="closeModal()">aceptar</ion-button>
+  </ion-toolbar>
+</ion-footer>

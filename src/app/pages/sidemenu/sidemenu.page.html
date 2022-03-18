@@ -1,0 +1,51 @@
+<ion-menu contentId="content">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" offset="4">
+            <ion-avatar>
+              <ion-img *ngIf="user.img_url" [src]="apiUrl + user.img_url"></ion-img>
+              <ion-img *ngIf="!user.img_url" src="../../../assets/images/default_avatar.png"></ion-img>
+            </ion-avatar>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-padding-bottom">
+          <ion-col size="12" class="ion-text-center">
+            <ion-label>{{ (user.firstname | titlecase) + ' ' + (user.lastname | titlecase) }}</ion-label>
+          </ion-col>
+          <ion-col size="12" class="ion-text-center">
+            <ion-label>{{ user.email }}</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list class="ion-no-padding" lines="none">
+      <ion-menu-toggle auto-hide="false" *ngFor="let page of pages">
+        <ion-item [routerLink]="page.url" routerDirection="root" routerLinkActive="active-item">
+          <ion-icon slot="start" [name]="page.icon"></ion-icon>
+          {{ page.title }}
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-item>
+        <ion-icon slot="start" name="moon-outline"></ion-icon>
+        <ion-label>
+          Modo Oscuro
+        </ion-label>
+        <ion-toggle [checked]="darkMode" (ionChange)="onClick($event)"></ion-toggle>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+
+  <ion-footer>
+    <ion-item color="primary" (click)="logout()">
+      <ion-icon slot="start" name="exit-outline"></ion-icon>
+      Salir
+    </ion-item>
+  </ion-footer>
+</ion-menu>
+
+<ion-router-outlet id="content" main></ion-router-outlet>

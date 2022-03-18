@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-buttons slot="start">
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-avatar size="large" slot="start">
+      <ion-img *ngIf="chat.provider_img_url" [src]="apiUrl + chat.provider_img_url"></ion-img>
+      <ion-img *ngIf="!chat.provider_img_url" src="../../../../assets/images/default_avatar.png"></ion-img>
+    </ion-avatar>
+    <ion-title>{{ chat.title }}</ion-title>
+    <ion-label class="subtitle">{{ chat.provider_name }}</ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content [ngClass]="{dark: darkMode, light: !darkMode}">
+  <ion-grid class="chat">
+    <ion-row *ngFor="let message of serverMessages">
+      <ion-col *ngIf="message.users_user_id !== user.user_id" size="8">
+        <ion-item class="ion-no-padding">
+          <ion-grid class="message">
+            <ion-row>
+              <ion-col size="12">
+                <ion-text color="secondary"><strong>{{ message.firstname + ' ' + message.lastname }}</strong></ion-text>
+              </ion-col>
+              <ion-col size="12">
+                <p class="ion-no-margin">{{ message.text }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <strong><ion-note color="secondary" slot="end">{{ message.created_at | date:'hh:mm a' }}</ion-note></strong>
+        </ion-item>
+      </ion-col>
+      <ion-col *ngIf="message.users_user_id == user.user_id" size="8" offset="4">
+        <ion-item class="ion-no-padding" color="primary">
+          <ion-grid class="message">
+            <ion-row>
+              <ion-col size="12">
+                <p class="ion-no-margin">{{ message.text }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <strong><ion-note color="secondary" slot="end">{{ message.created_at | date:'hh:mm a' }}</ion-note></strong>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-footer [ngClass]="{dark: darkMode, light: !darkMode}">
+    <ion-toolbar>
+      <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-textarea #textarea formControlName="message" rows="1" placeholder="Escribe un mensaje"></ion-textarea>
+              </ion-item>
+            </ion-col>
+            <ion-col size="2">
+              <ion-button type="submit" class="ion-float-end" color="primary">
+                <ion-icon name="send-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

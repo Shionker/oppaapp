@@ -1,0 +1,53 @@
+.dark {
+  --background: 0 0/70% url('../../../../../assets/images/chat-background-black2.png');
+}
+
+.light {
+  --background: 0 0/70% url('../../../../../assets/images/chat-background-white2.png');
+}
+
+ion-footer {
+  position: fixed;
+  bottom: 0;
+}
+
+ion-textarea {
+  min-height: 50px;
+}
+
+.footer-md::before {
+  height: 0px;
+}
+
+ion-item {
+  box-shadow: 0 3px 5px -1px rgb(0 0 0 / 20%), 0 6px 10px 0 rgb(0 0 0 / 14%), 0 1px 18px 0 rgb(0 0 0 / 12%);
+}
+
+ion-footer ion-button {
+  --border-radius: 30px !important;
+  height: 50px;
+}
+
+ion-note {
+  position: absolute;
+  right: 4px;
+  bottom: 3px;
+}
+
+ion-grid.message {
+  padding-bottom: 15px;
+}
+
+ion-grid.chat {
+  padding-bottom: 75px;
+}
+
+.subtitle {
+  padding: 0 20px
+}
+
+ion-avatar {
+  width: 45px;
+  height: 45px;
+  margin: 10px 0;
+}
